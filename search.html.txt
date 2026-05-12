@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search App</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#f0f2f5;
+  font-family:Arial;
+}
+
+.box{
+  background:white;
+  padding:40px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  text-align:center;
+  width:300px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin:15px 0;
+  border:1px solid #ccc;
+  border-radius:6px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#007bff;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* THANK YOU ANIMATION */
+#thanks{
+  opacity:0;
+  transform:scale(0.5);
+  font-size:22px;
+  color:green;
+  margin-top:20px;
+  transition:0.5s;
+}
+
+#thanks.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <h2>Search Box</h2>
+
+  <input type="text" id="SearchBox" placeholder="Type something...">
+
+  <button onclick="sendMail()">Submit</button>
+
+  <div id="thanks">🎉 Thanks!</div>
+
+</div>
+
+<script>
+
+emailjs.init("W-WD9-A9EdXElvKgO"); // change this
+
+function sendMail(){
+
+  let searchText = document.getElementById("searchBox").value;
+
+  let params = {
+    message: searchText
+  };
+
+  emailjs.send(
+    "service_eo2ai99",
+    "template_4jpss7r",
+    params
+  )
+  .then(function(){
+
+    // ❌ remove popup completely
+    // alert removed
+
+    // ✅ show thanks animation
+    let t = document.getElementById("thanks");
+    t.classList.add("show");
+
+    // hide after 2.5 sec
+    setTimeout(()=>{
+      t.classList.remove("show");
+    },2500);
+
+    document.getElementById("searchBox").value = "";
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
