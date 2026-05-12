@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Mail App</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <style>
+
+    body{
+      margin:0;
+      padding:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#f0f2f5;
+      font-family:Arial;
+    }
+
+    .container{
+      background:white;
+      padding:40px;
+      border-radius:10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      text-align:center;
+    }
+
+    input{
+      width:250px;
+      padding:12px;
+      margin:15px 0;
+      border:1px solid #ccc;
+      border-radius:5px;
+    }
+
+    button{
+      padding:12px 20px;
+      background:#007bff;
+      border:none;
+      color:white;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#0056b3;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <div class="container">
+
+    <h2>Search Box</h2>
+
+    <input type="text" id="searchBox" placeholder="Type something...">
+
+    <br>
+
+    <button onclick="sendMail()">Submit</button>
+
+  </div>
+
+  <script>
+
+    emailjs.init("W-WD9-A9EdXElvKgO");
+
+    function sendMail(){
+
+      let searchText =
+      document.getElementById("searchBox").value;
+
+      let params = {
+        message: searchText
+      };
+
+      emailjs.send(
+        "service_eo2ai99",
+        "template_4jpss7r",
+        params
+      )
+
+      .then(function(){
+
+        alert("Search text sent to email!");
+
+      })
+
+      .catch(function(){
+
+        alert("Failed to send!");
+
+      });
+
+    }
+
+  </script>
+
+</body>
+</html>
