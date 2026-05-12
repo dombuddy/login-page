@@ -70,7 +70,8 @@ button{
 
   <h2>Search Box</h2>
 
-  <input type="text" id="SearchBox" placeholder="Type something...">
+  <!-- FIXED ID -->
+  <input type="text" id="searchBox" placeholder="Type something...">
 
   <button onclick="sendMail()">Submit</button>
 
@@ -80,7 +81,7 @@ button{
 
 <script>
 
-emailjs.init("W-WD9-A9EdXElvKgO"); // change this
+emailjs.init("W-WD9-A9EdXElvKgO"); // Public Key
 
 function sendMail(){
 
@@ -97,10 +98,7 @@ function sendMail(){
   )
   .then(function(){
 
-    // ❌ remove popup completely
-    // alert removed
-
-    // ✅ show thanks animation
+    // show thanks animation
     let t = document.getElementById("thanks");
     t.classList.add("show");
 
@@ -109,8 +107,12 @@ function sendMail(){
       t.classList.remove("show");
     },2500);
 
+    // clear input
     document.getElementById("searchBox").value = "";
 
+  })
+  .catch(function(error){
+    console.log("Email error:", error);
   });
 
 }
